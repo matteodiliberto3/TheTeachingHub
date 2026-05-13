@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Teaching Hub
 
-## Getting Started
+Hub interattivo (Next.js) per formare associati su **EDA**, **architetture frontend**, **design pattern** (con animazioni) e **cybersecurity** integrata, con tab JSON / server / client, diagrammi Mermaid e playground Sandpack.
 
-First, run the development server:
+## Avvio locale
 
 ```bash
+npm install
+cp .env.example .env.local
+# Imposta DATABASE_URL in .env.local (mai committare questo file)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Database (Supabase / Postgres)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Copia `DATABASE_URL` nel file `.env.local` (escluso da git).
+2. Applica lo schema Drizzle:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run db:push
+```
 
-## Learn More
+In alternativa: `npm run db:generate` per creare migrazioni SQL versionate.
 
-To learn more about Next.js, take a look at the following resources:
+L’endpoint `GET /api/db-health` verifica la connessione. `POST /api/progress` registra una visita leggera (slug + `client_id` anonimo in `localStorage`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Sicurezza importante
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Se hai incollato una password di database in chat, email o issue, **ruotala subito** nel pannello Supabase e aggiorna `DATABASE_URL`. Non committare mai segreti nel repository.
