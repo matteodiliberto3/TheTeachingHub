@@ -2,6 +2,7 @@
 
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { useEffect, useState } from "react";
+import { getSandpackNetworkOptions } from "@/lib/sandpackNetworkOptions";
 
 type Props = {
   files: Record<string, string>;
@@ -32,6 +33,7 @@ export function SandpackLab({ files, template = "vanilla-ts" }: Props) {
           theme="dark"
           files={files}
           options={{
+            ...getSandpackNetworkOptions(),
             recompileMode: "delayed",
             recompileDelay: 400,
             resizablePanels: false,

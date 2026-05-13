@@ -1,17 +1,17 @@
 import { notFound } from "next/navigation";
-import { getLesson, type LessonSlug } from "@/lib/lessons/registry";
+import { getLesson } from "@/lib/lessons/registry";
 import { LessonLayout } from "@/components/lesson/LessonLayout";
 import { MermaidDiagram } from "@/components/diagram/MermaidDiagram";
 import { SandpackLab } from "@/components/lab/SandpackLab";
-import { EdaEventStage } from "@/components/stages/EdaEventStage";
 import { FrontendArchStage } from "@/components/stages/FrontendArchStage";
 import { PatternObserverStage } from "@/components/stages/PatternObserverStage";
 import { SecurityFlowStage } from "@/components/stages/SecurityFlowStage";
 import { LessonTrack } from "@/components/lesson/LessonTrack";
 
-const slugs: LessonSlug[] = ["eda", "frontend", "patterns", "security"];
+/** Moduli serviti da questa route dinamica (EDA ha tree dedicato sotto /learn/eda). */
+const slugs = ["frontend", "patterns", "security"] as const;
 
-function isLessonSlug(s: string): s is LessonSlug {
+function isContentSlug(s: string): s is (typeof slugs)[number] {
   return (slugs as readonly string[]).includes(s);
 }
 
@@ -21,14 +21,12 @@ export default async function LessonPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  if (!isLessonSlug(slug)) notFound();
+  if (!isContentSlug(slug)) notFound();
   const lesson = getLesson(slug);
   if (!lesson) notFound();
 
   const stage =
-    slug === "eda" ? (
-      <EdaEventStage />
-    ) : slug === "frontend" ? (
+    slug === "frontend" ? (
       <FrontendArchStage />
     ) : slug === "patterns" ? (
       <PatternObserverStage />

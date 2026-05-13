@@ -6,6 +6,8 @@ type Props = {
 };
 
 export function SeniorNotes({ items, className }: Props) {
+  if (!items.length) return null;
+
   return (
     <aside
       className={cn(

@@ -17,7 +17,7 @@ export default function LearnIndexPage() {
         {lessons.map((l) => (
           <li key={l.slug}>
             <Link
-              href={`/learn/${l.slug}`}
+              href={l.slug === "eda" ? "/learn/eda" : `/learn/${l.slug}`}
               className="block rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm transition hover:border-indigo-400/60 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-indigo-500/50"
             >
               <p className="text-xs font-semibold uppercase tracking-wide text-indigo-600 dark:text-indigo-300">

@@ -38,7 +38,7 @@ export default function Home() {
         {lessons.map((l) => (
           <Link
             key={l.slug}
-            href={`/learn/${l.slug}`}
+            href={l.slug === "eda" ? "/learn/eda" : `/learn/${l.slug}`}
             className="group rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-400/50 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-indigo-500/40"
           >
             <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">

@@ -26,8 +26,11 @@ export function HubSidebar() {
           Moduli
         </p>
         {lessons.map((l) => {
-          const href = `/learn/${l.slug}`;
-          const active = pathname === href;
+          const href = l.slug === "eda" ? "/learn/eda" : `/learn/${l.slug}`;
+          const active =
+            l.slug === "eda"
+              ? pathname === "/learn/eda" || pathname.startsWith("/learn/eda/")
+              : pathname === href;
           return (
             <Link
               key={l.slug}

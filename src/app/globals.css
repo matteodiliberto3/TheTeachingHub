@@ -43,3 +43,23 @@ body {
 .sandpack-hub iframe {
   background: #fff;
 }
+
+/* Laboratorio architettonico: editor che riempie la cella (stessa altezza della colonna mappa) */
+.architecture-lab-editor-only .sp-wrapper,
+.architecture-lab-editor-only .sp-stack {
+  height: 100%;
+  min-height: min(72vh, 880px);
+}
+
+.architecture-lab-editor-only .cm-editor {
+  min-height: min(72vh, 880px);
+}
+
+@media (min-width: 1280px) {
+  .architecture-lab-editor-only .sp-wrapper,
+  .architecture-lab-editor-only .sp-stack,
+  .architecture-lab-editor-only .cm-editor {
+    min-height: 0;
+    height: 100%;
+  }
+}
